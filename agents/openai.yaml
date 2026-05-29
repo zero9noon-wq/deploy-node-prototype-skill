@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deploy Node Prototype"
+  short_description: "Deploy a local Node/Web prototype to GitHub and Render."
+  default_prompt: "Help me formally deploy this local Node/Web prototype so others can open it through a shared link."
