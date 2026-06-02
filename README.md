@@ -30,6 +30,21 @@ The skill guides Codex through:
 - setting environment variables safely
 - verifying the production URL and health endpoint
 
+## Self-Evolving Workflow
+
+This skill now includes a lightweight self-evolution loop:
+
+```text
+deployment work
+-> log failures, corrections, and better patterns
+-> detect recurring Pattern-Key entries
+-> generate update proposals
+-> review before editing SKILL.md
+-> validate with pressure scenarios
+```
+
+The skill does not silently rewrite itself. It stores learnings in `learnings/`, proposes changes with `scripts/propose-skill-update.js`, and expects accepted updates to be checked against `evals/`.
+
 ## Install
 
 Clone this repository into your Codex skills directory:
@@ -67,6 +82,10 @@ Codex should then inspect the project, prepare the deployment configuration, gui
 
 - `SKILL.md`: the actual Codex skill instructions
 - `agents/openai.yaml`: UI metadata for Codex skill discovery
+- `learnings/`: learning, error, and feature-request logs
+- `evals/`: pressure scenarios and expected behavior for validating updates
+- `scripts/propose-skill-update.js`: generates reviewed update proposals from recurring learnings
+- `CHANGELOG.md`: accepted skill changes over time
 
 ## Safety Notes
 
@@ -76,4 +95,3 @@ This skill is intentionally strict about deployment safety:
 - Do not paste API keys into chat.
 - Put secrets in the hosting platform's environment variables.
 - Verify the deployed URL before calling the deployment complete.
-

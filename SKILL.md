@@ -9,6 +9,8 @@ description: Use when a user wants to turn a local Node.js, static HTML, or ligh
 
 Help the user move from "runs on my computer" to "others can open a public URL" with minimal jargon. Prefer GitHub as the code source and Render as the default host for small Node/static prototypes unless the user already chose another provider.
 
+This skill is self-evolving: it captures deployment failures, user corrections, provider changes, and better verification patterns, then promotes repeated lessons into update proposals after validation.
+
 ## Core Flow
 
 1. Inspect the project first.
@@ -59,6 +61,25 @@ services:
    - Check `/api/health` or equivalent when present.
    - Confirm API-backed features actually hit the backend, not just local fallback.
    - Give the user the public link and one sentence explaining how future updates work.
+
+## Self-Evolution Loop
+
+Before major deployment work, review `learnings/LEARNINGS.md`, `learnings/ERRORS.md`, and `learnings/FEATURE_REQUESTS.md` for unresolved high-priority entries.
+
+After deployment work, log anything that should improve future runs:
+
+- User corrections about the deployment flow, wording, or provider choice.
+- Repeated failures with GitHub, Render, Railway, Alibaba Cloud, environment variables, Node versions, port binding, or API-key configuration.
+- New provider behavior, UI changes, or verification steps.
+- Better prompts, checklists, or commands that reduced confusion.
+
+Promote a learning only when it is recurring or high impact:
+
+1. Add or update a learning entry with a stable `Pattern-Key`.
+2. If the same `Pattern-Key` reaches `Recurrence-Count >= 3`, run `node scripts/propose-skill-update.js`.
+3. Review the generated proposal before editing `SKILL.md`; do not silently change the skill.
+4. Validate changes against `evals/pressure-scenarios.md` and `evals/expected-behavior.md`.
+5. Record accepted changes in `CHANGELOG.md`.
 
 ## User Guidance Style
 
